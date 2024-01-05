@@ -32,8 +32,10 @@ float mouseEffect(vec2 uv, vec2 mouse, float size)
 
 
 void main() {
-    vec2 uv = gl_FragCoord.xy/u_resolution.xy;
-    
+vec2 uv = gl_FragCoord.xy/u_resolution.xy;
+   uv=(uv*2.-1.)/2.;   
+   uv.x *= (u_resolution.x/u_resolution.y);
+   uv= (uv+.5);    
 
    //float paraX = gl_FragCoord.x/u_resolution.x;
    //float paraY = gl_FragCoord.y/u_resolution.y;
@@ -50,8 +52,11 @@ void main() {
     float shading = texture2D(u_tex7,nuv).g;  //nuv替換 fpos 或 uvs有不同效果  
 
 
-   vec2 mouse=u_mouse.xy/u_resolution.xy;
-   float value=mouseEffect(nuv,mouse,0.1);
+    vec2 mouse=u_mouse.xy/u_resolution.xy;
+      mouse=(mouse*2.-1.)/2.;
+      mouse.x*= u_resolution.x/u_resolution.y;
+      mouse=mouse+.5;
+float value=mouseEffect(nuv,mouse,0.1);
    
   
 
